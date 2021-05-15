@@ -1,3 +1,6 @@
+import '../src/style.css';
+
+
 const colors = [
     '#FFFFFF',
     '#2196F3',
@@ -18,29 +21,20 @@ const stopChangeColors = document.querySelector('[data-action=stop]');
 console.log(stopChangeColors);
 
 const CLICK_START = 1000;
-const i =0;
+let changeBodyColors = null;
 
 
-const changeColors = startChangeColors.addEventListener('click', clickTimeStart);
-console.log(stopChangeColors);
+startChangeColors.addEventListener('click', randomColors);
 
-//body.classList.add(changeColors)
-//body.style.background = changeColors;
-function clickTimeStart() {
+function randomColors() {
 
-    setTimeout(() => {
-        body.style.background = colors;}, CLICK_START);
-    
+    changeBodyColors = setInterval(() => {
+        console.log(body.style.background = `${colors[randomIntegerFromInterval(0, colors.length - 1)]}`);}, CLICK_START);
+    startChangeColors.disabled = true;    
 };
+stopChangeColors.addEventListener('click', stopRandomChangeColors);
 
-//stopChangeColors.addEventListener('click', () => {console.log('dddd')});
-//console.log(stopChangeColors);
-/**var i = 0; // итератор
-
-function changeColor(){
-    document.body.style.background = colorArray[i]; 
-    i++;
-    if( i > colorArray.length - 1){
-        i = 0;
-    }
-} */
+function stopRandomChangeColors() {
+    startChangeColors.disabled = false;
+    clearInterval(changeBodyColors);
+};
